@@ -33,7 +33,7 @@ module FinalizeWithDropShipSupport
     shipments.each do |shipment|
       if SpreeDropShip::Config[:send_supplier_email] && shipment.supplier.present?
         begin
-          Spree::DropShipOrderMailer.supplier_order(shipment.id).deliver!
+          Spree::DropShipOrderMailer.supplier_order(shipment.id).deliver_later
         rescue => ex #Errno::ECONNREFUSED => ex
           puts ex.message
           puts ex.backtrace.join("\n")
