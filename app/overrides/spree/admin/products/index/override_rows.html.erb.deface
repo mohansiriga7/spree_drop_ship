@@ -3,8 +3,8 @@
 <%# Changed classes to new like https://github.com/spree/spree/blob/master/backend/app/views/spree/admin/stock_locations/_form.html.erb %>
 <td class="sku"><%= product.sku rescue '' %></td>
 
-<% if try_spree_current_user && try_spree_current_user.supplier? %>
-    <td class="image"><%= mini_image product.mc_product %></td>
+<% if product.mc_product.present? %>
+    <td class="image"><%= mini_image product.mc_product, class: "thumbnail" %></td>
 <% else %>
     <td class="image"><%= mini_image product, class: "thumbnail" %></td>
 <% end %>
