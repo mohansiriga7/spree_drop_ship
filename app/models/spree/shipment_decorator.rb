@@ -11,6 +11,7 @@ Spree::Shipment.class_eval do
   # https://github.com/spree-contrib/spree_drop_ship/issues/73
   # The "state" attribute on the shipping model was not ransackable
   self.whitelisted_ransackable_attributes = ['number', 'state']
+  self.whitelisted_ransackable_associations = %w[order]
 
   def display_final_price_with_items
     Spree::Money.new final_price_with_items

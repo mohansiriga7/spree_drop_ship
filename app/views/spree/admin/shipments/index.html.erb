@@ -56,7 +56,7 @@
     <thead>
       <tr data-hook="admin_orders_index_headers">
         <th><%= sort_link @search, :created_at,  Spree::Shipment.human_attribute_name(:created_at) %></th>
-        <th><%= sort_link @search, :delivery_date,  Spree::Shipment.human_attribute_name(:delivery_date) %></th>
+        <th><%= sort_link @search, 'order_preferred_delivery_date',  Spree::Shipment.human_attribute_name(:delivery_date) %></th>
         <th><%= sort_link @search, :number,  Spree::Shipment.human_attribute_name(:number) %></th>
         <th><%= sort_link @search, :state,  Spree::Shipment.human_attribute_name(:state) %></th>
         <th><%= sort_link @search, :item_cost,  Spree::Shipment.human_attribute_name(:item_cost) %></th>
