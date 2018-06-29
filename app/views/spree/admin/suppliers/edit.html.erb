@@ -15,7 +15,15 @@
   <div data-hook="supplier_right_column_wrapper" class="col-md-4"></div>
   <%# render 'update' and 'cancel'  buttons %>
   <div class="col-md-8">
-  <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+    <div class="form-actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'refresh', 'submit', {class: 'btn-success', data: { disable_with: "#{ Spree.t(:saving) }..." }} %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <% if try_spree_current_user.admin? %>
+        <%= button_link_to Spree.t('actions.cancel'), collection_url, icon: 'delete' %>
+      <% else %>
+          <%= button_link_to Spree.t('actions.cancel'), "/admin/sub_orders", icon: 'delete' %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
