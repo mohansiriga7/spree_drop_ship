@@ -27,7 +27,8 @@ class Spree::Supplier < Spree::Base
   validates :commission_flat_rate,   presence: true
   validates :commission_percentage,  presence: true
   validates :email,                  presence: true, email: true, uniqueness: true
-  validates :name,                   presence: true, uniqueness: true
+  # According to MiGrocer Business Model, Multiple stores can have same name.
+  #validates :name,                   presence: true, uniqueness: true
   validates :url,                    format: { with: URI::regexp(%w(http https)), allow_blank: true }
 
   #==========================================
