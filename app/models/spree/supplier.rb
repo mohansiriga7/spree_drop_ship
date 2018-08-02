@@ -62,6 +62,16 @@ class Spree::Supplier < Spree::Base
     stock_locations.select { |sl| sl.available?(variant) }
   end
 
+  def send_welcome
+    begin
+      Spree::SupplierMailer.welcome(self.id).deliver_later!
+        # Specs raise error for not being able to set default_url_options[:host]
+    rescue => ex #Errno::ECONNREFUSED => ex
+      Rails.logger.error ex.message
+      Rails.logger.error ex.backtrace.join("\n")
+      return true # always return true so that failed email doesn't crash app.
+    end
+  end
   #==========================================
   # Protected Methods
 
@@ -92,17 +102,6 @@ class Spree::Supplier < Spree::Base
         )
         # It's important location is always created.  Some apps add validations that shouldn't break this.
         location.save validate: false
-      end
-    end
-
-    def send_welcome
-      begin
-        Spree::SupplierMailer.welcome(self.id).deliver_later!
-        # Specs raise error for not being able to set default_url_options[:host]
-      rescue => ex #Errno::ECONNREFUSED => ex
-        Rails.logger.error ex.message
-        Rails.logger.error ex.backtrace.join("\n")
-        return true # always return true so that failed email doesn't crash app.
       end
     end
 
